@@ -3,6 +3,8 @@ package com.Prueba.Colegio.Controlador;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -37,10 +39,20 @@ public class AsignaturaController {
 		return asignaturaService.createAsignatura(asignatura);
 	}
 
-	@PutMapping("/{id}")
+	
+	 @PutMapping("/{id}")
+	    public ResponseEntity<Asignatura> updateAsignatura(@PathVariable Long id, @RequestBody Asignatura asignatura) {
+	        try {
+	            Asignatura updatedAsignatura = asignaturaService.updateAsignatura(id, asignatura);
+	            return ResponseEntity.ok(updatedAsignatura);
+	        } catch (Exception e) {
+	            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+	        }
+	    }
+	/*@PutMapping("/{id}")
 	public Asignatura updateAsignatura(@PathVariable Long id, @RequestBody Asignatura asignaturaDetails) {
 		return asignaturaService.updateAsignatura(id, asignaturaDetails);
-	}
+	}*/
 
 	@DeleteMapping("/{id}")
 	public void deleteAsignatura(@PathVariable Long id) {

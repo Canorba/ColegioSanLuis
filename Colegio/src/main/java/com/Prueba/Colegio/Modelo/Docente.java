@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import java.util.Date;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 public class Docente {
 
@@ -23,6 +25,7 @@ public class Docente {
     private String celular;
 
     @OneToMany(mappedBy = "docente")
+    @JsonIgnoreProperties("docente")
     private List<Asignatura> asignaturas;
 
 	/**

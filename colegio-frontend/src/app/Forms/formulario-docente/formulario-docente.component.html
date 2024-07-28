@@ -1,1 +1,111 @@
-<p>formulario-docente works!</p>
+<form [formGroup]="addressForm" novalidate (ngSubmit)="onSubmit()">
+    <mat-card class="shipping-card">
+      <mat-card-header>
+        <mat-card-title class="words">Acualizar Docente</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <mat-form-field class="full-width">
+          <mat-label>Id</mat-label>
+          <input matInput placeholder="Id" formControlName="id">
+          <mat-error *ngIf="addressForm.controls['id'].hasError('required')"><strong>Campo Requerido</strong>
+          </mat-error>
+        </mat-form-field>
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="full-width">
+              <mat-label>Numero de Documento</mat-label>
+              <input matInput placeholder="numeroDocumento" formControlName="numeroDocumento">
+              <mat-error *ngIf="addressForm.controls['numeroDocumento'].hasError('required')"><strong>Campo Requerido</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col"><mat-form-field class="full-width">
+            <mat-label>Tipo de documento</mat-label>
+            <input matInput placeholder="tipoDocumento" formControlName="tipoDocumento">
+            <mat-error *ngIf="addressForm.controls['tipoDocumento'].hasError('required')"><strong>Campo Requerido</strong>
+            </mat-error>
+            </mat-form-field>
+          </div>    
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="full-width">
+              <mat-label>Nombre </mat-label>
+              <input matInput placeholder="nombres" formControlName="nombres">
+              <mat-error *ngIf="addressForm.controls['nombres'].hasError('required')"><strong>Campo Requerido</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col">            
+              <mat-form-field class="full-width">
+                <mat-label>Apellido</mat-label>
+                <input matInput placeholder="apellidos" formControlName="apellidos">
+                <mat-error *ngIf="addressForm.controls['apellidos'].hasError('required')"><strong>Campo Requerido</strong>
+                </mat-error>
+              </mat-form-field>        
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col">
+             <mat-form-field class="full-width">
+              <mat-label>Grado Responsable</mat-label>
+              <input matInput placeholder="gradoResponsable" formControlName="gradoResponsable">
+              <mat-error *ngIf="addressForm.controls['gradoResponsable'].hasError('required')"><strong>Campo Requerido</strong>
+              </mat-error>
+            </mat-form-field> 
+          </div>
+          <div class="col">
+            <mat-form-field class="full-width">
+              <mat-label>Fecha de Nacimiento</mat-label>
+              <input matInput placeholder="fechaNacimiento" formControlName="fechaNacimiento">
+              <mat-error *ngIf="addressForm.controls['fechaNacimiento'].hasError('required')"><strong>Campo Requerido</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="full-width">
+              <mat-label>Numero Telefonico fijo</mat-label>
+              <input matInput placeholder="telefonoFijo" formControlName="telefonoFijo">
+              <mat-error *ngIf="addressForm.controls['telefonoFijo'].hasError('required')"><strong>Campo Requerido</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col">
+            <mat-form-field class="full-width">
+              <mat-label>Ultimo Grado Escolar</mat-label>
+              <input matInput placeholder="ultimoGradoEscolaridad" formControlName="ultimoGradoEscolaridad">
+              <mat-error *ngIf="addressForm.controls['ultimoGradoEscolaridad'].hasError('required')"><strong>Campo Requerido</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="full-width">
+              <mat-label>Correo Electronico</mat-label>
+              <input matInput placeholder="email" formControlName="email">
+              <mat-error *ngIf="addressForm.controls['email'].hasError('required')">Ingrese un <strong>correo electronico valido</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col">
+            <mat-form-field class="full-width">
+              <mat-label>Celular</mat-label>
+              <input matInput placeholder="celular" formControlName="celular">
+              <mat-error *ngIf="addressForm.controls['celular'].hasError('required')"><strong>Campo Requerido</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button color="primary" type="submit">Submit</button>
+      </mat-card-actions>
+    </mat-card>
+  </form>

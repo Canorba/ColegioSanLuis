@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { lastValueFrom } from 'rxjs/internal/lastValueFrom';
 import { Observable } from 'rxjs/internal/Observable';
@@ -16,16 +16,6 @@ export class ApiService {
     return this.http.get<any>(this.url + controlador);
   }
 
-  /*public async get(controlador: string) {
-    var response: any
-    await this.http.get(this.url + controlador).toPromise().then(res => {
-      response = res
-      console.log(response);
-    });
-    return response
-  }*/
-  
-
   public async getById(controlador: string, id:any) {
     var response: any
     await this.http.get(this.url + controlador+"/"+ id).subscribe(res => {
@@ -42,22 +32,15 @@ export class ApiService {
     });
     return response
   }
-
-  // public async put(controlador: string, body:any, id:any) {
-  //   var response: any
-  //   await this.http.put(this.url + controlador+"/"+ id, body).subscribe(res => {
-  //     response = res
-  //     console.log("res"+response);
-  //   });
-  //   return response
-    
-    
-  // }
   public async put(controlador: string, body: any, id: any) {
     try {
-      
-      const response = await this.http.put(this.url + controlador + "/" + id, body).toPromise();
-      
+      const url = `${this.url}${controlador}/${id}`;
+      console.log('Enviando datos PUT:', url, body);
+      const response = await this.http.put(url, body, {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json'
+        })
+      }).toPromise();
       return response;
     } catch (error) {
       console.error("Error al realizar la solicitud PUT:", error);

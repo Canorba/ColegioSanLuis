@@ -3,6 +3,8 @@ package com.Prueba.Colegio.Modelo;
 import java.util.Date;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -30,6 +32,7 @@ public class Estudiante {
         joinColumns = @JoinColumn(name = "estudiante_id"),
         inverseJoinColumns = @JoinColumn(name = "asignatura_id")
     )
+    @JsonIgnoreProperties("estudiantes")
     private List<Asignatura> asignaturas;
 
 	/**

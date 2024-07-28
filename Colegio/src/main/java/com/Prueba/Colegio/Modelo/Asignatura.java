@@ -2,6 +2,8 @@ package com.Prueba.Colegio.Modelo;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -14,9 +16,11 @@ public class Asignatura {
 
 	@ManyToOne
 	@JoinColumn(name = "docente_id")
+	@JsonIgnoreProperties("asignaturas")
 	private Docente docente;
 
 	@ManyToMany(mappedBy = "asignaturas")
+	@JsonIgnoreProperties("asignaturas")
 	private List<Estudiante> estudiantes;
 
 	/**

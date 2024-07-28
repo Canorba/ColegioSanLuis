@@ -58,18 +58,6 @@ export class TableTemplateComponent implements OnInit{
       console.error("Error al obtener los datos de la tabla:", error);
     }
   }
- 
-  /*public async datosTabla(){
-   
-    await this.Api.get(this.TableService.controlador).then((res)=>{
-      this.displayedColumns=Object.keys(res[0])
-      this.dataSource.data=res
-      this.TableService.dataSource=res
-      this.displayedColumns.push(this.acciones) 
-    });
-    this.dataSource.paginator=this.paginator;
-    this.dataSource.sort=this.sort
-  }*/
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -131,26 +119,23 @@ export class TableTemplateComponent implements OnInit{
       );
   } 
 
-  edit(object:any){
-
- switch(this.Componenente){
+  edit(object: any) {
+    switch (this.Componenente) {
       case "Estudiante":
-        this.forms.object=object
-          this.forms.componente.next("Estudiante")
-          this.dialog.open(FormularioAsignaturaComponent);
+        this.forms.object = object;
+        this.forms.componente.next("Estudiante");
+        this.dialog.open(FormularioEstudianteComponent);
         break;
-        
       case "Docente":
-          this.forms.object=object
-              this.forms.componente.next("Docente")
-            this.dialog.open( FormularioDocenteComponent);
-            break;
-
-        case "Asignatura":
-              this.forms.object=object
-              this.forms.componente.next("Asignatura")
-              this.dialog.open( FormularioEstudianteComponent);
-              break;
-       }
+        this.forms.object = object;
+        this.forms.componente.next("Docente");
+        this.dialog.open(FormularioDocenteComponent);
+        break;
+      case "Asignatura":
+        this.forms.object = object;
+        this.forms.componente.next("Asignatura");
+        this.dialog.open(FormularioAsignaturaComponent);
+        break;
     }
+  }
 }

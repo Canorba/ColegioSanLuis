@@ -10,11 +10,12 @@ export class FormsService {
   object:any
   formularios: any[] = []; 
   constructor() { }
+  
   deleteFormulario(id: string) {
     const formularioIndex = this.formularios.findIndex((formulario) => formulario.id === id);
     if (formularioIndex !== -1) {
       this.formularios.splice(formularioIndex, 1);
-      this.componente.next("Compras");
+      this.componente.next("componente");
     }
   }
 }

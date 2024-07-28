@@ -32,6 +32,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import { LoginComponent } from './Component/login/login.component'; 
 import { routes } from './app.routes';
 import { MatSortModule } from '@angular/material/sort';
+import { FormGroup } from '@angular/forms';
 
 NgModule({
   declarations: [
@@ -47,6 +48,7 @@ NgModule({
     TableTemplateComponent
 ],
   imports: [
+    FormGroup,
     BrowserModule,
     routes,
     BrowserAnimationsModule,

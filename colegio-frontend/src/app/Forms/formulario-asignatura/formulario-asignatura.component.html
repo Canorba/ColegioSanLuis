@@ -1,1 +1,34 @@
-<p>formulario-asignatura works!</p>
+<form [formGroup]="addressForm" novalidate (ngSubmit)="onSubmit()">
+  <mat-card class="shipping-card">
+    <mat-card-header>
+      <mat-card-title class="words">Acualizar Asignatura</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-form-field class="full-width">
+        <mat-label>Id</mat-label>
+        <input matInput placeholder="Id" formControlName="id">
+        <mat-error *ngIf="addressForm.controls['id'].hasError('required')"><strong>Campo Requerido</strong>
+        </mat-error>
+      </mat-form-field>  
+      <div class="row">
+        </div>
+        <div class="col">
+          <mat-form-field class="full-width">
+            <mat-label>Nombre de la asignatura</mat-label>
+            <input matInput placeholder="nombre" formControlName="nombre">
+            <mat-error *ngIf="addressForm.controls['nombre'].hasError('required')"><strong>Campo Requerido</strong>
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field class="full-width">
+            <mat-label>Id Docente</mat-label>
+            <input matInput placeholder="Id" formControlName="docenteId">
+            <mat-error *ngIf="addressForm.controls['docenteId'].hasError('required')"><strong>Campo Requerido</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="primary" type="submit">Submit</button>
+    </mat-card-actions>
+  </mat-card>
+</form>

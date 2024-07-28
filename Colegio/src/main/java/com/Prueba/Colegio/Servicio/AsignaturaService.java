@@ -7,14 +7,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.Prueba.Colegio.Modelo.Asignatura;
+import com.Prueba.Colegio.Modelo.Docente;
 import com.Prueba.Colegio.Repositorio.AsignaturaRepository;
+import com.Prueba.Colegio.Repositorio.DocenteRepository;
 
 @Service
 public class AsignaturaService {
 
 	@Autowired
     private AsignaturaRepository asignaturaRepository;
-
+	@Autowired
+    private DocenteRepository docenteRepository;
+	
     public List<Asignatura> getAllAsignaturas() {
         return asignaturaRepository.findAll();
     }
@@ -27,15 +31,17 @@ public class AsignaturaService {
         return asignaturaRepository.save(asignatura);
     }
 
-    public Asignatura updateAsignatura(Long id, Asignatura asignaturaDetails) {
-        Optional<Asignatura> asignaturaOpt = asignaturaRepository.findById(id);
-        if (asignaturaOpt.isPresent()) {
-            Asignatura asignatura = asignaturaOpt.get();
-            asignatura.setNombre(asignaturaDetails.getNombre());
-            asignatura.setDocente(asignaturaDetails.getDocente());
-            return asignaturaRepository.save(asignatura);
-        }
-        return null;
+    public Asignatura updateAsignatura(Long id, Asignatura asignatura) {
+        Asignatura existingAsignatura = asignaturaRepository.findById(id)
+                .orElseThrow();
+
+        Docente docente = docenteRepository.findById(asignatura.getDocente().getId())
+                .orElseThrow();
+
+        existingAsignatura.setNombre(asignatura.getNombre());
+        existingAsignatura.setDocente(docente);
+
+        return asignaturaRepository.save(existingAsignatura);
     }
 
     public void deleteAsignatura(Long id) {

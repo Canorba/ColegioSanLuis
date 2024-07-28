@@ -56,23 +56,7 @@ export class AsignaturaComponent implements OnInit{
     } catch (error) {
       console.error("Error al obtener los datos de la tabla:", error);
     }
-  }
-
-  /*public async Getpersona(){
-  this.TableService.titleTabla="Estudiantes";
-  this.TableService.controlador = "Estudiantes";
-
-     await this.Api.get("Estudiantes").then((res)=>{
-     
-      this.displayedColumns=Object.keys(res[0])
-       
-        this.dataSource.data=res
-        this.TableService.dataSource=res;
-    });
-    this.dataSource.paginator=this.paginator;
-    this.dataSource.sort=this.sort
-  }*/
-  
+  }  
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
