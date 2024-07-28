@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { ApiService } from '../../Services/api.service'; 
+import { ApiService } from '../../Services/api.service';
 import { FormularioEstudianteComponent } from '../../Forms/formulario-estudiante/formulario-estudiante.component';
 import { TableService } from './../../Services/table.service';
 import { MatDialog } from '@angular/material/dialog';
@@ -26,7 +26,8 @@ export class EstudianteComponent implements OnInit{
   titulo="Estudiantes";
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
-  constructor(public Api: ApiService,public TableService: TableService,public dialog: MatDialog,public forms: FormsService){
+
+  constructor(private Api: ApiService,public TableService: TableService,public dialog: MatDialog,public forms: FormsService){
     this.dataSource=new MatTableDataSource();
   }
 
@@ -54,9 +55,7 @@ export class EstudianteComponent implements OnInit{
     this.dataSource.paginator=this.paginator;
     this.dataSource.sort=this.sort
   }
-
-
-
+  
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();

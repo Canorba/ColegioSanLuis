@@ -7,9 +7,9 @@ import { Observable } from 'rxjs/internal/Observable';
 })
 export class ApiService {
 
-  constructor(private http: HttpClient) { }
-  url = "https://localhost:7008/api/";
+  private url = "https://localhost:7008/api/";
 
+  constructor(private http: HttpClient) { }
 
   public async get(controlador: string) {
     var response: any

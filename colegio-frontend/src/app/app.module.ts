@@ -19,7 +19,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatCardModule } from '@angular/material/card';
 import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient } from '@angular/common/http'; 
 import {MatTableModule} from '@angular/material/table';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatPaginatorModule } from '@angular/material/paginator';
@@ -57,13 +57,11 @@ NgModule({
     MatIconModule,
     MatListModule,
     MatSortModule,
-    routes,
     MatInputModule,
     MatSelectModule,
     MatRadioModule,
     MatCardModule,
     ReactiveFormsModule,
-    HttpClientModule,
     MatTableModule,
     MatFormFieldModule,
     MatPaginatorModule,
@@ -73,7 +71,7 @@ NgModule({
     CommonModule
   ],
   
-  providers: [],
+  providers: [provideHttpClient()],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
