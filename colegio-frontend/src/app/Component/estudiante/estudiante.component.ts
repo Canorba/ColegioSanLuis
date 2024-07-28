@@ -8,6 +8,7 @@ import { TableService } from './../../Services/table.service';
 import { MatDialog } from '@angular/material/dialog';
 import { FormsService } from '../../Services/forms.service';
 import { TableTemplateComponent } from "../table-template/table-template.component";
+import { lastValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-estudiante',
@@ -21,18 +22,18 @@ export class EstudianteComponent implements OnInit{
   column?:Object;
   displayedColumns: string[]=[]
   dataSource!: MatTableDataSource<any>; 
-
+  acciones = 'acciones';
   Componenente?: String;
   titulo="Estudiantes";
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private Api: ApiService,public TableService: TableService,public dialog: MatDialog,public forms: FormsService){
+  constructor(private Api: ApiService,public tableService: TableService,public dialog: MatDialog,public forms: FormsService){
     this.dataSource=new MatTableDataSource();
   }
 
   ngOnInit(): void {
-      this.Getpersona();
+      this.Getestudiantes();
      
   }
 
@@ -41,19 +42,21 @@ export class EstudianteComponent implements OnInit{
 
   }
 
-  public async Getpersona(){
-  this.TableService.titleTabla="Estudiantes";
-  this.TableService.controlador = "Estudiantes";
+  async Getestudiantes() {
+    this.tableService.titleTabla = "Estudiantes";
+    this.tableService.controlador = "Estudiantes";
 
-     await this.Api.get("Estudiantes").then((res)=>{
-     
-      this.displayedColumns=Object.keys(res[0])
-       
-        this.dataSource.data=res
-        this.TableService.dataSource=res;
-    });
-    this.dataSource.paginator=this.paginator;
-    this.dataSource.sort=this.sort
+    try {
+      const res: any[] = await lastValueFrom(this.Api.get("estudiantes"));
+      this.displayedColumns = Object.keys(res[0]);
+      this.dataSource.data = res;
+      this.tableService.dataSource = res;
+      this.displayedColumns.push(this.acciones);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+    } catch (error) {
+      console.error("Error al obtener los datos de la tabla:", error);
+    }
   }
   
   applyFilter(event: Event) {

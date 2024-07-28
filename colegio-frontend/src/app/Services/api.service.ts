@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { lastValueFrom } from 'rxjs/internal/lastValueFrom';
 import { Observable } from 'rxjs/internal/Observable';
 
 @Injectable({
@@ -7,18 +8,22 @@ import { Observable } from 'rxjs/internal/Observable';
 })
 export class ApiService {
 
-  private url = "https://localhost:7008/api/";
+  private url = "http://localhost:8080/";
 
   constructor(private http: HttpClient) { }
 
-  public async get(controlador: string) {
+  public get(controlador: string): Observable<any> {
+    return this.http.get<any>(this.url + controlador);
+  }
+
+  /*public async get(controlador: string) {
     var response: any
     await this.http.get(this.url + controlador).toPromise().then(res => {
       response = res
       console.log(response);
     });
     return response
-  }
+  }*/
   
 
   public async getById(controlador: string, id:any) {

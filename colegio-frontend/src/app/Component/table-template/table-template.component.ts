@@ -10,7 +10,7 @@ import Swal from 'sweetalert2';
 import { MatDialog } from '@angular/material/dialog';
 import { FormsService } from '../../Services/forms.service';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { lastValueFrom, Observable } from 'rxjs';
 import { FormularioAsignaturaComponent } from '../../Forms/formulario-asignatura/formulario-asignatura.component';
 import { FormularioDocenteComponent } from '../../Forms/formulario-docente/formulario-docente.component';
 import { FormularioEstudianteComponent } from '../../Forms/formulario-estudiante/formulario-estudiante.component';
@@ -45,8 +45,21 @@ export class TableTemplateComponent implements OnInit{
   this.datosTabla();
   }
 
+  async datosTabla() {
+    try {
+      const res: any[] = await lastValueFrom(this.Api.get(this.Componenente));
+      this.displayedColumns = Object.keys(res[0]);
+      this.dataSource.data = res;
+      this.TableService.dataSource = res;
+      this.displayedColumns.push(this.acciones);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+    } catch (error) {
+      console.error("Error al obtener los datos de la tabla:", error);
+    }
+  }
  
-  public async datosTabla(){
+  /*public async datosTabla(){
    
     await this.Api.get(this.TableService.controlador).then((res)=>{
       this.displayedColumns=Object.keys(res[0])
@@ -56,7 +69,7 @@ export class TableTemplateComponent implements OnInit{
     });
     this.dataSource.paginator=this.paginator;
     this.dataSource.sort=this.sort
-  }
+  }*/
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
